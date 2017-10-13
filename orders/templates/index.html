@@ -1,0 +1,115 @@
+{% extends 'layout.html' %}
+
+{% block title %} All Orders {% endblock %}
+
+{% block body %}
+                <section>
+                    <div class="section-body">
+                        <!-- BEGIN DATATABLE 2 -->
+                       <div class="img-backdrop" style="background-image: url('img/img16.jpg')"></div> 
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-head style-primary" style="background-color: #DC0000">
+                                     <div class="w3-row">
+    <div class="w3-third">
+
+    </div>
+                                        <header style="font-family: Lato, sans-serif">List of Mobile Suit Gundam</header>
+
+                                        <div class="tools">
+                                            <a class="btn btn-icon-toggle btn-collapse"><i class="fa fa-angle-down"></i></a>
+                                            <a class="btn btn-icon-toggle btn-close"><i class="md md-close"></i></a>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <div class="table-responsive">
+
+                                            <table id="datatable2" class="table order-column hover">
+                                                <thead>
+
+                                                    <tr>
+                                                        <th>Model ID</th>
+                                                        <th>Mobile Suit</th>
+                                                        <th>Pilot Name</th>
+                                                        <th>Mobile Suit Unit</th>
+                                                        <th>Gundam's Manufacturing Date</th>
+                                                        <th>Capabilities</th>
+                                                        <th>Attack Damage</th>
+                                                        <th>Speed</th>
+                                                        <th>Armor</th>
+                                                        <th width="150px">Desc</th>
+                                                    </tr>
+
+                                                </thead>
+
+                                                <tbody>
+                                                    {% for order in orders %}
+                                                        <tr class="gradeX">
+                                                            <td>{{ order.id }}</td>
+                                                            <td>{{ order.name }}</td>
+                                                            <td>{{ order.phone }}</td>
+                                                            <td>{{ order.address }}</td>
+                                                            <td>{{ order.delivery_date }}</td>
+                                                            <td>{{ order.product_id.product_name }}</td>
+                                                            <td>{{ order.payment_option }}</td>
+                                                            <td>{{ order.quantity }}</td>
+                                                            <td>{{ order.product_id.price }}</td>
+                                                            <td>{% widthratio order.product_id.price 1 order.quantity  %}</td>
+                                                            {% if order.order_status == 'Confirm' %}
+                                                                <td><span class="badge">{{ order.order_status }}</span></td>
+                                                            {% elif order.order_status == 'Ready' %}
+                                                                <td><span class="badge" style="background: #ff9800"> {{ order.order_status }}</span></td>
+                                                            {% elif order.order_status == 'Send' %}
+                                                                <td><span class="badge" style="background: #0c84e4"> {{ order.order_status }}</span></td>
+                                                            {% elif order.order_status == 'Delivered' %}
+                                                                <td><span class="badge" style="background: #0aa89e"> {{ order.order_status }}</span></td>
+                                                            {% elif order.order_status == 'Returned' %}
+                                                                <td><span class="badge" style="background: #f44336"> {{ order.order_status }}</span></td>
+                                                            {% elif order.order_status == 'Cancelled' %}
+                                                                <td><span class="badge" style="background: #313534"> {{ order.order_status }}</span></td>
+                                                            {% endif %}
+                                                            <td>
+
+                                                                <a href="{% url 'delete' order.id %}" class="btn ink-reaction btn-floating-action btn-danger" onclick="return confirm('Are you sure you want to delete this?')"><i class="md md-delete"></i> </a>
+                                                                <a href="{% url 'edit' order.id %}" class="btn ink-reaction btn-floating-action btn-warning"><i class="md md-edit"></i> </a>                 
+                                                                <a href="{% url 'show' order.id %}" class="btn ink-reaction btn-floating-action btn-primary"><i class="md md-print"></i> </a>
+
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div><!--end .table-responsive -->
+                                    </div>   
+                                </div>       
+                            </div><!--end .col -->
+                        </div><!--end .row -->
+                        <!-- END DATATABLE 2 -->
+
+
+    <div class="w3-third">
+    <img src="http://1.bp.blogspot.com/-yzI0usKmOZE/VWvaM_xyjZI/AAAAAAAFcvM/P-UPW0KNlqI/s1600/strike%2Bfreedom%2Bgundam%2B%25287%2529.jpg" style="width:100%">
+    <div class="w3-content w3-justify" style="max-width:600px">
+      
+      <hr class="w3-opacity">
+      <p>
+     A Gundam is an advanced, high performance mobile suit, often constructed to be much more powerful than the standard production mobile suits. They are generally equipped with the latest experimental technology available at the time of their construction. The definition of a Gundam varies from one timeline to another. In most series it is used as an acronym to refer to something, however in all but the most recent series these acronyms were derived after the fact and do not appear at any point in the animated works. The protagonist's mobile suit of a series usually carries the name Gundam. The main suit in each series usually sports a mainly white and blue color scheme, with yellow and red accents, and sports at least one pair of yellow or white V-fins on its head.
+      </p>
+      <hr class="w3-opacity">
+
+        
+    </div>
+    <hr class="w3-opacity">
+      <p>
+    <img src="https://wallpapercave.com/wp/is2tQuc.jpg" style="width:100%">
+    Mobile Suit Gundam: Twilight AXIS will be turned into an online anime and get its premiere this June. The anime air exclusively for members of the official Gundam Fan Club. The story is based off a novel written previously by Kojiro Nakamura. The canon book takes place in the Universal Century 0096 shortly after Mobile Suit Gundam Unicorn ends. It follows a set of three mechanics-come-researchers who are on an exploratory mission just outside of Earth's orbit.
+     </p>
+      <hr class="w3-opacity">
+    </div>
+                    </div><!--end .section-body -->
+                </section>
+{% endblock %}
